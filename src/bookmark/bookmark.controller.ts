@@ -5,7 +5,6 @@ import {
   Get,
   HttpCode,
   HttpStatus,
-  NotFoundException,
   Param,
   ParseIntPipe,
   Patch,
@@ -24,11 +23,7 @@ export class BookmarkController {
 
   @Get(':id')
   getSingleBookmark(@Param('id', ParseIntPipe) bookmarkId: number) {
-    try {
-      return this.bookmarkService.getSingleBookmark(bookmarkId);
-    } catch (error) {
-      throw new NotFoundException();
-    }
+    return this.bookmarkService.getSingleBookmark(bookmarkId);
   }
 
   @Post()
@@ -41,20 +36,12 @@ export class BookmarkController {
     @Param('id', ParseIntPipe) bookmarkId: number,
     @Body() dto: EditBookmarkDto,
   ) {
-    try {
-      return this.bookmarkService.editBookmark(bookmarkId, dto);
-    } catch (error) {
-      throw new NotFoundException();
-    }
+    return this.bookmarkService.editBookmark(bookmarkId, dto);
   }
 
   @HttpCode(HttpStatus.NO_CONTENT) // NOT_CONTENT 204 error
   @Delete(':id')
   deleteBookmarksById(@Param('id', ParseIntPipe) bookmarkId: number) {
-    try {
-      return this.bookmarkService.deleteBookmark(bookmarkId);
-    } catch (error) {
-      throw new NotFoundException();
-    }
+    return this.bookmarkService.deleteBookmark(bookmarkId);
   }
 }
