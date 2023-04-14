@@ -14,7 +14,7 @@ export class PrismaService extends PrismaClient {
     });
   }
 
-  // deletes bookmarks before a user, to prevent deleting a user without deleting the user's bookmark
+  // deletes all bookmarks
   cleanDb() {
     return this.$transaction([this.bookmark.deleteMany()]);
   }
