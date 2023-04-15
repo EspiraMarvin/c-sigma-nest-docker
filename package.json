@@ -1,5 +1,5 @@
 {
-  "name": "nest-intro",
+  "name": "c-sigma-nest-docker",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -10,6 +10,7 @@
     "prisma:generate":"npx prisma generate dev",
     "prisma:dev:deploy": "prisma migrate deploy",
     "db:dev:restart": "yarn db:dev:up && sleep 1 && yarn prisma:generate && sleep 1  && yarn prisma:dev:deploy",
+    "db:dev:start": "yarn prisma:generate && sleep 1 && yarn prisma:dev:deploy",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -21,7 +22,8 @@
     "test": "jest",
     "test:watch": "jest --watch --no-cache",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "dev:start": "docker build -t c-sigma-nest-docker . && docker run -p 4000:4000 c-sigma-nest-docker"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",

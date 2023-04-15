@@ -39,7 +39,6 @@ export class BookmarkController {
     return this.bookmarkService.editBookmark(bookmarkId, dto);
   }
 
-  @HttpCode(HttpStatus.NO_CONTENT) // NOT_CONTENT 204 error
   @Delete(':id')
   deleteBookmarksById(@Param('id', ParseIntPipe) bookmarkId: number) {
     return this.bookmarkService.deleteBookmark(bookmarkId);
