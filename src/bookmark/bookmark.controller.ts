@@ -3,8 +3,7 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
-  HttpStatus,
+  Header,
   Param,
   ParseIntPipe,
   Patch,
@@ -17,6 +16,7 @@ import { CreateBookmarkDto, EditBookmarkDto } from './dto';
 export class BookmarkController {
   constructor(private bookmarkService: BookmarkService) {}
   @Get()
+  @Header('Content-Type', 'application/json')
   getBookmarks() {
     return this.bookmarkService.getBookmarks();
   }

@@ -18,11 +18,29 @@ services:
       - /usr/src/app/prisma
     depends_on:
       - postgres
+    restart: unless-stopped
+    tty: true
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    depends_on:
+      - postgres
+    ports:
+      - "5555:80"
+    networks:
+      - api
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgdata:/var/lib/pgadmin
+    restart: unless-stopped 
+
 # postgres service
   postgres:
     container_name: postgres
     image: postgres:13
-    restart: always
     ports:
       - 5432:5432
     environment:
@@ -35,6 +53,8 @@ services:
       - api
     volumes:
       - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+  
 networks:
  api:
   driver: bridge
