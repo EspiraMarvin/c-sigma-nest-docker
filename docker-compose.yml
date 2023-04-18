@@ -27,14 +27,14 @@ services:
     depends_on:
       - postgres
     ports:
-      - "5555:80"
+      - 5555:80
     networks:
       - api
     environment:
       PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
-      - pgdata:/var/lib/pgadmin
+      - pgdata:/var/lib/pgadmin/data
     restart: unless-stopped 
 
 # postgres service
