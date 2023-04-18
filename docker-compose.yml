@@ -1,15 +1,41 @@
 version: '3.8'
 services:
-  dev-db:
+  app:
+    container_name: app
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    networks:
+      - api
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/prisma
+    depends_on:
+      - postgres
+# postgres service
+  postgres:
+    container_name: postgres
     image: postgres:13
     restart: always
     ports:
-      - '5434:5432'
+      - 5432:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: nest
+    env_file:
+      - .env
     networks:
-      - nestdockerservice
+      - api
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 networks:
-  nestdockerservice:
+ api:
+  driver: bridge
+volumes:
+ pgdata:
