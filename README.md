@@ -9,9 +9,16 @@
 $ yarn install
 
 # restart postgres in docker and push migrations
-$ yarn db:dev:restart
+$ docker-compose up
 
-# start api in dev mode
-$ npm run start:dev
+## in detach mode
+$ docker-compose up -d
+
+
+
+# Enter into the nest app shell
+$ docker ps -a
+$ docker exec -it container-id bash
+$ npx prisma migrate deploy
 
 ```
