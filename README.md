@@ -14,8 +14,6 @@ $ docker-compose up
 ## in detach mode
 $ docker-compose up -d
 
-
-
 # Enter into the nest app shell
 $ docker ps -a
 $ docker exec -it container-id bash
